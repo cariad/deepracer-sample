@@ -1,0 +1,22 @@
+name: deepracer-sample
+
+on:
+  - push
+
+jobs:
+  lint:
+    container: cariad/ci:1.4.0
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - id: cache-venv
+        uses: actions/cache@v1
+        with:
+          key: ${{ runner.os }}-venv-${{ hashFiles('Pipfile.lock') }}
+          path: ~/.local/share/virtualenvs
+
+      - if: steps.cache-venv.outputs.cache-hit != 'true'
+        run: pipenv sync --dev
+
+      - run: pipenv run ./lint.sh
