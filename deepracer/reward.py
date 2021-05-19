@@ -3,7 +3,7 @@ from typing import Any, Dict
 
 def reward_function(params: Dict[str, Any]):
     """
-    Example of rewarding the agent to follow center line
+    Amazon's default example of rewarding the agent to follow the center line.
     """
 
     # Read input parameters
